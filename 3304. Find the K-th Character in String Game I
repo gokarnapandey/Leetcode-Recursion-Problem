@@ -1,0 +1,25 @@
+class Solution {
+
+    public StringBuilder solve(StringBuilder word, int k){
+        if(word.length() >= k){
+            return word;
+        }
+        int len = word.length();
+        for(int i=0; i<len; i++){
+            word.append((char) (word.charAt(i) + 1));;
+        }
+        return solve(word,k);
+    }
+
+
+    public char kthCharacter(int k) {
+        StringBuilder word = new StringBuilder("a");
+        StringBuilder finalWord = solve(word,k);
+
+        char x = 'x';
+        for(int i=0; i<k; i++){
+           x = finalWord.charAt(i); 
+        }
+        return x;
+    }
+}
