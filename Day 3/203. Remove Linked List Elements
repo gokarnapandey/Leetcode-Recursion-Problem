@@ -1,0 +1,28 @@
+class Solution {
+    public ListNode removeElements(ListNode head, int val) {
+        // Edge case: If head is null, return null
+        if (head == null) return null;
+
+        // Move head to the first non-val node
+        while (head != null && head.val == val) {
+            head = head.next;
+        }
+
+        // Use a pointer to traverse the list
+        ListNode temp = head;
+        ListNode prevNode = null;
+
+        while (temp != null) {
+            if (temp.val == val) {
+                // Remove the node by skipping it
+                prevNode.next = temp.next;
+            } else {
+                // Update prevNode only when not removing
+                prevNode = temp;
+            }
+            temp = temp.next;
+        }
+
+        return head;
+    }
+}
