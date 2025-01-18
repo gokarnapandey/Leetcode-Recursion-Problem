@@ -1,0 +1,26 @@
+class Solution {
+    private ListNode frontPointer;
+
+    public boolean isPalindrome(ListNode head) {
+        frontPointer = head;
+        return recursivelyCheck(head);
+    }
+
+    private boolean recursivelyCheck(ListNode currentNode) {
+        if (currentNode != null) {
+            // Recurse until the last node
+            if (!recursivelyCheck(currentNode.next)) {
+                return false;
+            }
+
+            // Compare values from both ends
+            if (frontPointer.val != currentNode.val) {
+                return false;
+            }
+
+            // Move front pointer ahead for the next comparison
+            frontPointer = frontPointer.next;
+        }
+        return true;
+    }
+}
