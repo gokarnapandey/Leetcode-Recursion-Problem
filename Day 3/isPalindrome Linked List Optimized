@@ -1,0 +1,46 @@
+class Solution {
+
+    // Function to reverse a linked list iteratively
+    public ListNode reverseList(ListNode head) {
+        ListNode prev = null, curr = head;
+        
+        while (curr != null) {
+            ListNode nextNode = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = nextNode;
+        }
+        return prev; // Returns the new head of the reversed list
+    }
+
+    // Function to check if two lists are equal
+    public boolean areEqual(ListNode list1, ListNode list2) {
+        while (list1 != null && list2 != null) {
+            if (list1.val != list2.val) {
+                return false;
+            }
+            list1 = list1.next;
+            list2 = list2.next;
+        }
+        return true;
+    }
+
+    // Function to check if a linked list is a palindrome
+    public boolean isPalindrome(ListNode head) {
+        if (head == null || head.next == null)
+            return true;
+
+        // Find the middle node
+        ListNode slow = head, fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        // Reverse the second half of the list
+        ListNode reversedHead = reverseList(slow);
+
+        // Compare both halves
+        return areEqual(head, reversedHead);
+    }
+}
