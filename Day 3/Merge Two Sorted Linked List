@@ -1,0 +1,44 @@
+class Solution {
+
+    public ListNode solve(ListNode list1, ListNode list2){
+        ListNode finalList;
+        if(list1 == null && list2 == null){
+            return null;
+        }
+        
+        if(list1 == null){
+            finalList = list2;
+            return finalList;
+        }
+
+        if(list2 == null){
+            finalList = list1;
+            return finalList;
+        }
+
+        if(list1.val >= list2.val){
+            finalList = list2;
+            list2 = list2.next;
+            finalList.next = solve(list1, list2);
+        }else{
+            finalList = list1;
+            list1 = list1.next;
+            finalList.next = solve(list1, list2);
+        }
+
+         return finalList;
+    }
+
+
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        
+        if(list1 == null && list2 == null) return list1;
+            
+        if(list1 == null) return list2;
+
+        if(list2 == null) return list1;
+
+       return solve(list1, list2);
+
+    }
+}
